@@ -26,8 +26,11 @@ const Applicants = () => {
             Authorization: `Bearer ${token}`,
           },
         });
+        console.log("Fetching applicants for jobId:", params.id);
+        console.log("API Response:", res.data);
+        console.log("Applicants:", res.data.job?.applications); // 👈 add this line
+        dispatch(setAllApplicants(res.data.job.applications));
 
-        dispatch(setAllApplicants(res.data.applicants));
       } catch (error) {
         setError(error?.response?.data?.message || "Failed to fetch applicants.");
       } finally {
